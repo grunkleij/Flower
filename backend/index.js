@@ -26,8 +26,8 @@ app.post('/api/create', (req, res) => {
 });
 
 app.get('/api/users',(req,res)=>{
-    const username=req.body.username;
-    db.query("select * from users where uname=?",username,(err,result)=>{
+    const email=req.query.email;
+    db.query("select * from users where email=?",email,(err,result)=>{
         if(err){
             console.log(err);
         }
