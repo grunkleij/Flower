@@ -11,9 +11,10 @@ app.use(express.json());
 
 app.post('/api/create', (req, res) => {
     const username = req.body.username;
+    const email= req.body.email;
     const password = req.body.password;
 
-    db.query("INSERT INTO `users` (`uname`, `password`, `timestamp`) VALUES (?, ?, current_timestamp());", [username, password], (err, result) => {
+    db.query("INSERT INTO `users` ( `email`, `username`, `password`, `timestamp`) VALUES (?, ?, ?, current_timestamp());", [email,username, password], (err, result) => {
         if (err) {
             console.log(err);
             res.status(500).json({ error: 'Internal Server Error' });
