@@ -5,6 +5,9 @@ import NavBar from './components/NavBar/NavBar';
 import Signup from './components/Signup/Signup';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
+import Admin from './components/Admin/Admin';
+import FlowerAdmin from './components/Admin/FlowerAdmin/FlowerAdmin';
+import EmpSignup from './components/Signup/EmpSingup/EmpSginup';
 
 
 function App() {
@@ -15,6 +18,8 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="login" element={<Login/>}/>
       <Route path="signup" element={<Signup/>}/>
+      <Route path="admin" element={<Admin/>}/>
+      <Route path="/signup/emp" element={<EmpSignup/>}/>
     </Routes>
     </BrowserRouter>
   );
