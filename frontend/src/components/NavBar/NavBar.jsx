@@ -136,10 +136,10 @@ const NavBar = () => {
             ) : (
               <>
                 <p className="mx-2 d-flex">{user}</p>
-                <div className="mx-2">
+                <Link to="buypage" className="mx-2">
                 <i class="fa" style={{"font-size":"24px"}}><FaCartShopping /></i>
 <span class='badge badge-warning ' id='lblCartCount'> {carnum} </span>
-                </div>
+                </Link>
                 <button onClick={handleLogout} className="btn btn-danger"><ImSwitch/></button>
 
               </>

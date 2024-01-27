@@ -155,6 +155,36 @@ app.get('/api/cartnum',(req,res)=>{
   })
 })
 
+app.get('/api/cartflower', (req, res) => {
+  const username = req.query.username;
+
+  db.query('SELECT * FROM users WHERE username=?', username, (err, userResult) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+
+    if (userResult.length === 0) {
+      // User not found
+      res.status(404).json({ error: 'User not found' });
+      return;
+    }
+
+    const uid = userResult[0].uid;
+
+    db.query('SELECT flowers.* FROM cart JOIN flowers ON cart.fid = flowers.fid WHERE cart.uid = ?', uid, (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+
+      res.json(result);
+    });
+  });
+});
+
 
 
 app.listen(PORT, () => {
