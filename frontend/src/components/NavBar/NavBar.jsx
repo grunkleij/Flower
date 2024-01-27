@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import axios from "axios";
+import './NavBar.css'
+import { FaCartShopping } from "react-icons/fa6";
+import { ImSwitch } from "react-icons/im";
 
 const NavBar = () => {
   const { user,logout } = useAuth();
+  const [carnum,setCartnum]=useState('');
+  const emailPattern = /@fl\.org$/;
+
+  const fetchNum=()=>{
+    axios.get('http://localhost:4000/api/cartnum',{params:{
+      username:user
+    }})
+    .then((res)=>{
+      console.log(res.data.length)
+      setCartnum(res.data.length)
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
+  useEffect(()=>{
+    fetchNum();
+  },[carnum])
 
   const handleLogout=(e)=>{
     e.preventDefault();
@@ -38,6 +61,11 @@ const NavBar = () => {
               {(user==="admin")&&<li className="nav-item">
                 <Link to={"admin"} className="nav-link" href="#">
                   Admin
+                </Link>
+              </li>}
+              {emailPattern.test(user)&&<li className="nav-item">
+                <Link to={"admin"} className="nav-link" href="#">
+                  Devlivary
                 </Link>
               </li>}
               <li className="nav-item dropdown">
@@ -108,7 +136,12 @@ const NavBar = () => {
             ) : (
               <>
                 <p className="mx-2 d-flex">{user}</p>
-                <button onClick={handleLogout} className="btn btn-danger">Logout</button>
+                <div className="mx-2">
+                <i class="fa" style={{"font-size":"24px"}}><FaCartShopping /></i>
+<span class='badge badge-warning ' id='lblCartCount'> {carnum} </span>
+                </div>
+                <button onClick={handleLogout} className="btn btn-danger"><ImSwitch/></button>
+
               </>
             )}
           </div>

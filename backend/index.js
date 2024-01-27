@@ -96,6 +96,67 @@ app.post('/api/updatestock', (req, res) => {
     });
 });
 
+//employee login
+app.get('/api/emplogin',(req,res)=>{
+  const email=req.query.email;
+  db.query("select * from employee where empemail=?",email,(err,result)=>{
+      if(err){
+          console.log(err);
+      }
+      res.json(result);
+  })
+})
+
+//flower add
+app.post('/api/floweradd',(req,res)=>{
+  const {fname, price, stock} = req.body;
+
+  db.query("INSERT INTO `flowers` (`flowerName`, `fprice`, `stock`) VALUES (?, ?, ?);",[fname,price,stock],(err,result)=>{
+    if(err){
+      console.log(err);
+    }
+  res.json(result);   
+  })
+})
+
+// add to cart 
+app.post('/api/addtocart',(req,res)=>{
+  const {fid,username,qty}=req.body;
+  db.query("select * from users where username=?",username,(err,result)=>{
+    if(err){
+      console.log(err);
+    }
+    const uid=result[0].uid;
+    db.query("INSERT INTO `cart` ( `uid`, `fid`, `quantity`) VALUES ( ?, ?, ?)",[uid,fid,qty],(err,result)=>{
+      if(err){
+        console.log(err);
+      }
+      res.json(result);
+    })
+  })
+})
+
+//cartnumber
+
+app.get('/api/cartnum',(req,res)=>{
+  const username=req.query.username
+  db.query("select * from users where username=?",username,(err,result)=>{
+    if(err){
+      console.log(err);
+    }
+    const uid=result[0].uid;
+    console.log(uid)
+    db.query("select * from cart where uid = ?",uid,(err,result)=>{
+      if(err){
+        console.log(err);
+      }
+      res.json(result);
+    })
+  })
+})
+
+
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

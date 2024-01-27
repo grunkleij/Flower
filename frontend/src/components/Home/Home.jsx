@@ -1,12 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
+import AddToCart from "../AddToCart/AddToCart";
+import './Home.css'
+import { useAuth } from "../../context/AuthContext";
 
 const Home = () => {
   const [flowers, setFlowers] = useState([]);
+  const navigate=useNavigate();
+  const user=useAuth();
+
 
   useEffect(() => {
     axios.get("http://localhost:4000/api/flowers").then((res) => {
       console.log(res);
+      console.log(user.user);
       setFlowers(res.data);
     });
   }, []);
@@ -25,9 +33,14 @@ const Home = () => {
               <p class="card-text">
                 price: {e.fprice}
               </p>
-              <a href="#" class="btn btn-primary">
-                Buy
-              </a>
+              <div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Buy
+  </button>
+  <ul class="dropdown-menu dropdown-style">
+    <li><a class="dropdown-item" href="#"><AddToCart flowerData={e} userName={user.user}/></a></li>
+  </ul>
+</div>
             </div>
           </div>
         </>

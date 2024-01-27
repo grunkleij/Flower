@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -9,16 +9,19 @@ const Login = () => {
     const {user,login,logout}=useAuth();
     const navigate= useNavigate();
 
-    const handleLogin=(e)=>{
+    const handleSingup=(e)=>{
+        const emailPattern = /@fl\.org$/;
         e.preventDefault();
-        axios.get('http://localhost:4000/api/users',{params:{email}})
+        axios.get('http://localhost:4000/api/emplogin',{params:{email}})
         .then((res)=>{
             console.log(res);
-            if(res.data[0].password===password){
-              
-                console.log("login")
-                login(res.data[0].username);
-                navigate('/');
+            if(res.data[0].emppassword===password){
+              if(emailPattern.test(res.data[0].empemail)){
+
+                  console.log("login")
+                  login(res.data[0].empemail);
+                  navigate('/');
+                }
             }
         })
         .catch((err)=>{
@@ -28,7 +31,7 @@ const Login = () => {
 
   return (
     <>
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleSingup}>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input onChange={(e)=>{setEmail(e.target.value)}} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
@@ -39,7 +42,6 @@ const Login = () => {
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-    <Link to="/login/empsignup">employee?</Link>
 
     </>
   )

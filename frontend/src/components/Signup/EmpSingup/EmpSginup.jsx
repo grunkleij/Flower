@@ -11,26 +11,35 @@ const EmpSignup = () => {
     const navigate=useNavigate();
     
 
-    const handleSingup=(e)=>{
-        e.preventDefault();
-        if(password==cpassword){
-            axios.post('http://localhost:4000/api/emp',{username,email,password})
-            .then((res)=>{
-                console.log(res);
-                if(res.status===200){
-                    navigate('/');
-                }
+    const handleSignup = (e) => {
+      e.preventDefault();
+    
+      const emailPattern = /@fl\.org$/;
+    
+      if (password === cpassword) {
+        if (emailPattern.test(email)) {
+          axios
+            .post('http://localhost:4000/api/emp', { username, email, password })
+            .then((res) => {
+              console.log(res);
+              if (res.status === 200) {
+                navigate('/');
+              }
             })
-            .catch((err)=>{
-                console.log(err);
-            })
-        }else{
-            setConf(true);
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          setConf(true);
         }
-    }
+      } else {
+        setConf(true);
+      }
+    };
+    
   return (
     <>
-    <form onSubmit={handleSingup} className="container">
+    <form onSubmit={handleSignup} className="container">
     <div className="mb-3">
       <label for="exampleInputEmail1" className="form-label">Email address</label>
       <input onChange={(e)=>{setEmail(e.target.value)}} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
@@ -49,7 +58,7 @@ const EmpSignup = () => {
     </div>
     {
       conf&&<div class="alert alert-danger" role="alert">
-      Password should match
+      email should be an employees or password not matching
     </div>
     
   }
