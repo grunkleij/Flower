@@ -202,7 +202,6 @@ const getUid = (username) => {
         reject('User not found');
         return;
       }
-      console.log(userResult[0].uid);
       const uid = userResult[0].uid; // Assuming 'user_id' is the column name
       resolve(uid);
     });
