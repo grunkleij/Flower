@@ -5,6 +5,21 @@ import axios from "axios";
 const BuyPage = () => {
   const [flowers, setFlowers] = useState(null);
   const { user } = useAuth();
+
+  const handleBuy = (e) => {
+    e.preventDefault();
+    axios
+      .get("http://localhost:4000/api/buyflower", {
+        params: { flowerData: flowers, username: user, total: totalSum },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     console.log(user);
     axios
@@ -19,7 +34,7 @@ const BuyPage = () => {
         console.log(err);
       });
   }, []);
-  const totalSum = flowers.reduce((acc, flower) => acc + flower.fprice, 0);
+  const totalSum = flowers&&flowers.reduce((acc, flower) => acc + flower.fprice, 0);
   return (
     <div className="container">
       <h2 className="my-2">Checkout</h2>
@@ -34,10 +49,12 @@ const BuyPage = () => {
             </div>
           </div>
         ))}
-        <div class="alert alert-secondary " role="alert">
+        <div class="alert alert-secondary d-flex" role="alert">
             {
                 totalSum
             }
+
+            <button onClick={handleBuy} className="btn btn-success">Buy</button>
         </div>
     </div>
   );

@@ -155,6 +155,8 @@ app.get('/api/cartnum',(req,res)=>{
   })
 })
 
+
+
 app.get('/api/cartflower', (req, res) => {
   const username = req.query.username;
 
@@ -183,6 +185,84 @@ app.get('/api/cartflower', (req, res) => {
       res.json(result);
     });
   });
+});
+
+// to get username
+const getUid = (username) => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM users WHERE username=?', username, (err, userResult) => {
+      if (err) {
+        console.log(err);
+        reject('Internal Server Error');
+        return;
+      }
+
+      if (userResult.length === 0) {
+        // User not found
+        reject('User not found');
+        return;
+      }
+      console.log(userResult[0].uid);
+      const uid = userResult[0].uid; // Assuming 'user_id' is the column name
+      resolve(uid);
+    });
+  });
+};
+
+
+//buy flower
+app.get("/api/buyflower", (req, res) => {
+  const { flowerData, username, total } = req.query;
+
+  if (!Array.isArray(flowerData)) {
+    console.log("not an array");
+    return res.status(400).json({ error: "flowerData must be an array" });
+  }
+
+  // Step 1: Insert a new order
+  getUid(username)
+    .then((uid) => {
+      console.log(uid);
+      db.query("INSERT INTO orders (user_id) VALUES (?)", [uid], (err, orderResult) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ error: "Error creating order" });
+        }
+
+        const orderId = orderResult.insertId; // Get the order_id from the inserted order
+
+        // Step 2: Insert order details from the user's cart
+        const queries = flowerData.map((flower) => {
+          return new Promise((resolve, reject) => {
+            db.query(
+              "INSERT INTO order_details (order_id, flower_id, quantity, total_price) VALUES (?, ?, ?, ?)",
+              [orderId, flower.fid, flower.stock, total],
+              (detailErr, detailResult) => {
+                if (detailErr) {
+                  console.log(detailErr);
+                  reject({ error: "Error inserting order details" });
+                } else {
+                  resolve(detailResult);
+                }
+              }
+            );
+          });
+        });
+
+        // Execute all queries in parallel
+        Promise.all(queries)
+          .then((results) => {
+            res.json({ message: "Order placed successfully", results });
+          })
+          .catch((error) => {
+            res.status(500).json(error);
+          });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Error getting user ID" });
+    });
 });
 
 
