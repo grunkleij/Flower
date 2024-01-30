@@ -25,8 +25,11 @@ const NavBar = () => {
   }
 
   useEffect(()=>{
-    fetchNum();
-  },[carnum])
+    console.log(user)
+    if(user!==null){
+      fetchNum();
+    }
+  },[user])
 
   const handleLogout=(e)=>{
     e.preventDefault();
