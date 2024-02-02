@@ -9,6 +9,7 @@ import Admin from './components/Admin/Admin';
 import EmpSignup from './components/Signup/EmpSingup/EmpSginup';
 import EmpLogin from './components/Login/EmpLogin/EmpLogin';
 import BuyPage from './components/BuyPage/BuyPage';
+import Employee from './components/Employee/Employee';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route path="/signup/emp" element={<EmpSignup/>}/>
       <Route path="/login/empsignup" element={<EmpLogin/>}/>
       <Route path="buypage" element={<BuyPage/>}/>
+      <Route path="emp" element={<Employee/>}/>
     </Routes>
     </BrowserRouter>
   );

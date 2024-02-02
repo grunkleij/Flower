@@ -99,7 +99,7 @@ const BuyPage = () => {
         </div>
         <div className="my-2">
           <label htmlFor="instruction" className="form-bable" >instruction</label>
-          <textarea cols="4" type="text" className="form-control" id="instruction" />
+          <textarea onChange={(e)=>{setInstruction(e.target.value)}} cols="4" type="text" className="form-control" id="instruction" />
         </div>
       </div>
       <div className="alert alert-secondary d-flex" role="alert">

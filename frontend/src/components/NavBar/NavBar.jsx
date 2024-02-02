@@ -12,6 +12,7 @@ const NavBar = () => {
   const emailPattern = /@fl\.org$/;
 
   const fetchNum=()=>{
+    if(!emailPattern.test(user)){
     axios.get('http://localhost:4000/api/cartnum',{params:{
       username:user
     }})
@@ -22,6 +23,7 @@ const NavBar = () => {
     .catch((err)=>{
       console.log(err);
     })
+  }
   }
 
   useEffect(()=>{
@@ -67,8 +69,8 @@ const NavBar = () => {
                 </Link>
               </li>}
               {emailPattern.test(user)&&<li className="nav-item">
-                <Link to={"admin"} className="nav-link" href="#">
-                  Devlivary
+                <Link to={"emp"} className="nav-link" href="#">
+                  Employee
                 </Link>
               </li>}
               <li className="nav-item dropdown">
