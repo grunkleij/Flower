@@ -10,6 +10,7 @@ import EmpSignup from './components/Signup/EmpSingup/EmpSginup';
 import EmpLogin from './components/Login/EmpLogin/EmpLogin';
 import BuyPage from './components/BuyPage/BuyPage';
 import Employee from './components/Employee/Employee';
+import DeliveryPage from './components/Delivery/DeliveryPage';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <Route path="/login/empsignup" element={<EmpLogin/>}/>
       <Route path="buypage" element={<BuyPage/>}/>
       <Route path="emp" element={<Employee/>}/>
+      <Route path="delivery" element={<DeliveryPage/>}/>
     </Routes>
     </BrowserRouter>
   );

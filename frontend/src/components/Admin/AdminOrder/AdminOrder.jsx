@@ -7,8 +7,8 @@ const AdminOrder = () => {
 
   const handleEmp=(e,eid,uid,order_id)=>{
     e.preventDefault();
-    console.log(eid);
-    axios.post("http://localhost:4000/api/delivery",{params:{uid,eid,order_id}})  
+    console.log("order Id",order_id);
+    axios.post("http://localhost:4000/api/delivery",{uid:uid,eid:eid,order_id:order_id})  
       .then((res)=>{
         console.log(res);
       })
