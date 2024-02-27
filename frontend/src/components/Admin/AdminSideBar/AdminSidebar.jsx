@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import FlowerAdmin from '../FlowerAdmin/FlowerAdmin'
 import { BrowserRouter, Link } from 'react-router-dom'
 import AdminOrder from '../AdminOrder/AdminOrder';
+import PackOrderAdmin from '../PackOrderAdmin/PackOrderAdmin';
 
 const AdminSidebar = () => {
     const [active,setActive]=useState('flowers');
@@ -29,6 +30,10 @@ const AdminSidebar = () => {
                     <li>
                         <Link to="#" onClick={()=>{handleClick("order")}} className="nav-link px-0 align-middle">
                             <i className="fs-4 bi-table"></i> <span className="ms-1 d-none d-sm-inline">Orders</span></Link>
+                    </li>
+                    <li>
+                        <Link to="#" onClick={()=>{handleClick("packorder")}} className="nav-link px-0 align-middle">
+                            <i className="fs-4 bi-table"></i> <span className="ms-1 d-none d-sm-inline">Pack Orders</span></Link>
                     </li>
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
@@ -86,6 +91,7 @@ const AdminSidebar = () => {
         <div className="col py-3">
             {active==="flowers"&&<FlowerAdmin/>}
             {active==="order"&&<AdminOrder/>}
+            {active==="packorder"&&<PackOrderAdmin/>}
         </div>
     </div>
 </div>

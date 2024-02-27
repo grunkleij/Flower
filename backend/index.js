@@ -7,6 +7,7 @@ const cartRoutes = require('./routes/cartRoutes')
 const orderRoutes = require('./routes/orderRoutes')
 const employeeRoutes = require('./routes/employeeRoutes')
 const deliveryRoutes = require('./routes/deliveryRoutes')
+const packRoutes = require('./routes/packRoutes')
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/api', flowerRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', employeeRoutes);
+app.use('/api',packRoutes)
 app.use('/api', deliveryRoutes);
 
 

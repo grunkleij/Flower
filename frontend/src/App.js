@@ -11,6 +11,9 @@ import EmpLogin from './components/Login/EmpLogin/EmpLogin';
 import BuyPage from './components/BuyPage/BuyPage';
 import Employee from './components/Employee/Employee';
 import DeliveryPage from './components/Delivery/DeliveryPage';
+import Packs from './components/Packs/Packs';
+import PacksBuyPage from './components/Packs/PacksBuyPage';
+import PackOrderAdmin from './components/Admin/PackOrderAdmin/PackOrderAdmin';
 
 
 function App() {
@@ -26,7 +29,10 @@ function App() {
       <Route path="/login/empsignup" element={<EmpLogin/>}/>
       <Route path="buypage" element={<BuyPage/>}/>
       <Route path="emp" element={<Employee/>}/>
+      <Route path="pack" element={<Packs/>}/>
       <Route path="delivery" element={<DeliveryPage/>}/>
+      <Route path="packbuy" element={<PacksBuyPage/>}/>
+      <Route path="packorder" element={<PackOrderAdmin/>}/>
     </Routes>
     </BrowserRouter>
   );
