@@ -55,9 +55,10 @@ router.post('/delivery', (req, res) => {
 
 router.get('/getdelivery', (req, res) => {
   const { empEmail } = req.query;
-
+  console.log(empEmail);
   getEmp(empEmail)
     .then((eid) => {
+      console.log(eid);
       db.query("SELECT * FROM delivary WHERE emp_id = ?", eid, (err, result) => {
         if (err) {
           console.log(err);
@@ -136,6 +137,17 @@ router.get('/getudelivery', (req, res) => {
     });
   });
 });
+
+router.post('/delivered',(req,res)=>{
+  const {dornot,did} = req.body;
+  console.log("blah:",dornot,did)
+  db.query("UPDATE `delivary` SET `dornot` = ? WHERE `delivary`.`did` = ?; ",[dornot,did],(err,del)=>{
+    if(err){
+      console.log(err);
+    }
+    res.json(del);
+  })
+})
 
 
 

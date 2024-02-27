@@ -92,19 +92,33 @@ router.post('/setpackemp',(req,res)=>{
     })
 })
 
-router.get('/getpackdelivery',(req,res)=>{
-    const {empEmail}=req.query;
-    console.log(empEmail);
+router.get('/getpackdelivery', (req, res) => {
+    const { empEmail } = req.query;
+    console.log("Employee Email:", empEmail); // Log the received email for debugging
+
+    if (!empEmail) {
+        return res.status(400).json({ error: 'Missing empEmail parameter' });
+    }
+
     getEmp(empEmail)
-        .then((eid)=>{
-            db.query("select * from pack_orders where emp_id = ?",eid,(err,result)=>{
-                if(err){
-                    console.log(err);
+        .then((eid) => {
+            console.log("Employee ID:", eid); // Log the resolved employee ID for debugging
+
+            db.query("SELECT * FROM pack_orders WHERE emp_id = ?", eid, (err, result) => {
+                if (err) {
+                    console.log("Database Error:", err); // Log any database errors
+                    return res.status(500).json({ error: 'Database Error' });
                 }
+                // console.log("Query Result:", result); // Log the query result for debugging
                 res.json(result);
-            })
+            });
         })
-})
+        .catch((error) => {
+            console.log("getEmp Error:", error); // Log any errors from getEmp function
+            res.status(404).json({ error: 'Employee not found' });
+        });
+});
+
 
 router.post('/emppackdel',(req,res)=>{
     const {dornot,pid} = req.body;
