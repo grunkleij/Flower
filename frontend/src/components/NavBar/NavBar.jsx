@@ -68,6 +68,11 @@ const NavBar = () => {
                   Delivery
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/selling">
+                  Selling
+                </Link>
+              </li>
               {(user==="admin")&&<li className="nav-item">
                 <Link to={"admin"} className="nav-link" href="#">
                   Admin

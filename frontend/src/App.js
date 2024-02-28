@@ -14,6 +14,7 @@ import DeliveryPage from './components/Delivery/DeliveryPage';
 import Packs from './components/Packs/Packs';
 import PacksBuyPage from './components/Packs/PacksBuyPage';
 import PackOrderAdmin from './components/Admin/PackOrderAdmin/PackOrderAdmin';
+import SellingPage from './components/Selling/SellingPage';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <Route path="delivery" element={<DeliveryPage/>}/>
       <Route path="packbuy" element={<PacksBuyPage/>}/>
       <Route path="packorder" element={<PackOrderAdmin/>}/>
+      <Route path="selling" element={<SellingPage/>}/>
     </Routes>
     </BrowserRouter>
   );

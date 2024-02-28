@@ -20,12 +20,16 @@ const DeliveryPage = () => {
 
   return (
     <div className="container">
-      <div className="container my-3">
+      {
+        detail&&detail.map((e)=>(
+          <>
+          <div className="container my-3">
+            <p>Date : {e.delivery_detail.dtimestamp}</p>
         <div class="progress">
           <div
             class="progress-bar bg-warning"
             role="progressbar"
-            style={{ width: "50%" }}
+            style={{ width: e.delivery_detail.dornot===0?"50%":"100%" }}
             aria-valuenow="50"
             aria-valuemin="0"
             aria-valuemax="100"
@@ -37,6 +41,10 @@ const DeliveryPage = () => {
         <p>Out of delivery</p>
         <p>Delivered</p>
       </div>
+          </>
+        ))
+      }
+      
     </div>
   );
 };
