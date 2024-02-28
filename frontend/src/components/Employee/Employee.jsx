@@ -8,6 +8,7 @@
     const [pack,setPack] = useState([])
     const [duser, setDuser] = useState([]);
     const [isdel, setIsdel] = useState([]);
+    const [selling,setSelling]=useState();
 
     const handlePackDel = (e,pid) =>{
       e.preventDefault();
@@ -51,6 +52,15 @@
           .catch((err)=>{
             console.log(err);
           })
+
+      axios.get("http://localhost:4000/api/getsellingdel",{params:{user:user}})
+          .then((res)=>{
+            console.log(res.data);
+            setSelling(res.data);
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
     // fetchPack();
     fetchDel();
     }, []);
@@ -64,6 +74,20 @@
       })
       .then((res)=>{
         fetchDel();
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    };
+    const handlePickup = (e, sid) => {
+      e.preventDefault();
+      console.log(sid);
+      axios.post('http://localhost:4000/api/pickedup',{
+        dornot:1,
+        sid:sid
+      })
+      .then((res)=>{
         console.log(res);
       })
       .catch((err)=>{
@@ -156,6 +180,32 @@
       <td>{p.pincode}</td>
       <td>{p.instruction}</td>
       <td>{p.dornot===0?<button className="btn btn-primary" onClick={(c)=>{handlePackDel(c,p.packs_order_id)}}>deliver</button>:"delivered"}</td>
+      </tr>
+      ))}
+  </tbody>
+</table>
+        </div>
+        <div className="container">
+          <h1>Pack Order</h1>
+          <table class="table">
+  <thead>
+    <tr>
+    <th scope="col">#</th>
+                    <th scope="col">id</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Flower Name</th>
+                    <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+      {selling&&selling.map((p)=>(
+    <tr>
+      <td>{p.sid}</td>
+      <td>{p.uid}</td>
+      <td>{p.address}</td>
+      <td>{p.flowerName}</td>
+      <td>{p.qty}</td>
+      <td>{p.dornot===0?<button className="btn btn-primary" onClick={(c)=>{handlePickup(c,p.sid)}}>Pick up</button>:"Picked up"}</td>
       </tr>
       ))}
   </tbody>

@@ -3,6 +3,7 @@ import FlowerAdmin from '../FlowerAdmin/FlowerAdmin'
 import { BrowserRouter, Link } from 'react-router-dom'
 import AdminOrder from '../AdminOrder/AdminOrder';
 import PackOrderAdmin from '../PackOrderAdmin/PackOrderAdmin';
+import AdminSelling from '../AdminSelling/AdminSelling';
 
 const AdminSidebar = () => {
     const [active,setActive]=useState('flowers');
@@ -34,6 +35,10 @@ const AdminSidebar = () => {
                     <li>
                         <Link to="#" onClick={()=>{handleClick("packorder")}} className="nav-link px-0 align-middle">
                             <i className="fs-4 bi-table"></i> <span className="ms-1 d-none d-sm-inline">Pack Orders</span></Link>
+                    </li>
+                    <li>
+                        <Link to="#" onClick={()=>{handleClick("adminselling")}} className="nav-link px-0 align-middle">
+                            <i className="fs-4 bi-table"></i> <span className="ms-1 d-none d-sm-inline">Flower Selling request</span></Link>
                     </li>
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
@@ -92,6 +97,7 @@ const AdminSidebar = () => {
             {active==="flowers"&&<FlowerAdmin/>}
             {active==="order"&&<AdminOrder/>}
             {active==="packorder"&&<PackOrderAdmin/>}
+            {active==="adminselling"&&<AdminSelling/>}
         </div>
     </div>
 </div>

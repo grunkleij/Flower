@@ -8,6 +8,7 @@ const orderRoutes = require('./routes/orderRoutes')
 const employeeRoutes = require('./routes/employeeRoutes')
 const deliveryRoutes = require('./routes/deliveryRoutes')
 const packRoutes = require('./routes/packRoutes')
+const sellRoutes =  require('./routes/sellRoutes')
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('/api', orderRoutes);
 app.use('/api', employeeRoutes);
 app.use('/api',packRoutes)
 app.use('/api', deliveryRoutes);
+app.use('/api',sellRoutes);
 
 
 
