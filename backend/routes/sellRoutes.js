@@ -91,15 +91,38 @@ router.get('/getsellingdel',(req,res)=>{
         })
 })
 
-router.post('/pickedup',(req,res)=>{
-    const {dornot,sid} = req.body;
-    db.query("UPDATE `selling` SET `dornot` = ? WHERE `selling`.`sid` = ?",[dornot,sid],(err,result)=>{
-        if(err){
-            console.log(err);
-        }
-        res.json(result);
-    })
-})
+router.post('/pickedup', (req, res) => {
+  const { dornot, sid } = req.body;
+  db.query("UPDATE `selling` SET `dornot` = ? WHERE `selling`.`sid` = ?", [dornot, sid], (err, result) => {
+      if (err) {
+          console.log(err);
+          return res.status(500).json({ error: "Database error" });
+      }
+      db.query("SELECT * FROM selling WHERE sid = ?", sid, (error, sellingRows) => {
+          if (error) {
+              console.log(error);
+              return res.status(500).json({ error: "Database error" });
+          }
+          const sellingRow = sellingRows[0]; // Assuming there's only one selling row for a given sid
+          db.query("SELECT * FROM flowers WHERE fid = ?", sellingRow.fid, (er, flowerRows) => {
+              if (er) {
+                  console.log(er);
+                  return res.status(500).json({ error: "Database error" });
+              }
+              const flowerRow = flowerRows[0]; // Assuming there's only one flower row for a given fid
+              const updatedStock = flowerRow.stock + sellingRow.qty;
+              db.query("UPDATE `flowers` SET `stock` = ? WHERE `flowers`.`fid` = ? ", [updatedStock, flowerRow.fid], (huh, okay) => {
+                  if (huh) {
+                      console.log(huh);
+                      return res.status(500).json({ error: "Database error" });
+                  }
+                  res.json(okay);
+              });
+          });
+      });
+  });
+});
+
 
 
 
