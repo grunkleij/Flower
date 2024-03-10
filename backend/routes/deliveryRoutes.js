@@ -107,7 +107,7 @@ router.get('/getudelivery', (req, res) => {
       console.log(err);
       return res.status(500).json({ error: 'Internal server error' });
     }
-
+    console.log(result[0].uid);
     const uid = result[0].uid;
     db.query('SELECT order_id FROM orders WHERE user_id = ?', uid, (err, oresult) => {
       if (err) {
@@ -116,7 +116,7 @@ router.get('/getudelivery', (req, res) => {
       }
 
       const orderIds = oresult.map(row => row.order_id);
-
+      console.log(oresult);
       // Fetch delivery details for each order
       db.query('SELECT * FROM delivary WHERE order_id IN (?)', [orderIds], (err, dresult) => {
         if (err) {

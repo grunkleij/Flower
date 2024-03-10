@@ -1,27 +1,28 @@
 import axios from "axios";
-import { React, useState } from "react";
+import React, { useState } from "react";
 
 const AddToCart = (props) => {
   const [stock, setStock] = useState("");
 
   const handleCart = (e) => {
-    e.preventDefault();
-    axios.post("http://localhost:4000/api/addtocart",{
-        fid:props.flowerData.fid,
-        username:props.userName,
-        qty:stock
-    })
-    .then((res)=>{
+    e.preventDefault(); // Prevent the default form submission behavior
+    axios
+      .post("http://localhost:4000/api/addtocart", {
+        fid: props.flowerData.fid,
+        username: props.userName,
+        qty: stock,
+      })
+      .then((res) => {
         console.log(res);
-    })
-    .catch((err)=>{
+      })
+      .catch((err) => {
         console.log(err);
-    })
+      });
   };
 
   return (
     <div className="d-flex gap-2">
-      <lable className="form-label">No:</lable>
+      <label className="form-label">No:</label>
       <input
         onChange={(e) => {
           setStock(e.target.value);
@@ -29,7 +30,7 @@ const AddToCart = (props) => {
         type="text"
         className="form-control"
       />
-      <button onClick={handleCart} className="btn btn-primary">
+      <button type="button" onClick={handleCart} className="btn btn-primary">
         add to cart
       </button>
     </div>

@@ -1,3 +1,13 @@
 .dropdown-style{
     width:350px;
 }
+
+.flowerc{
+    border: 2px dotted black;
+    border-radius: 20px;
+}
+
+.bbtn{
+    border-radius:30px;
+    border:2px dotted black;
+}

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import DebitCardPayment from "../Payment/DebitCardPayment ";
 
 const PacksBuyPage = () => {
     
@@ -16,6 +17,10 @@ const PacksBuyPage = () => {
   const [instruction,setInstruction]=useState()
 
   const handleBuy = (e) =>{
+    if (!address || !state || !street || !pincode || !instruction) {
+      alert("Please fill out all fields.");
+      return;
+    }
     console.log(user);
     e.preventDefault();
     axios.post("http://localhost:4000/api/buypack",{
@@ -29,9 +34,11 @@ const PacksBuyPage = () => {
     })
         .then((res)=>{
             console.log(res);
+            alert("Flower Selling placed")
         })
         .catch((err)=>{
             console.log(err);
+            alert("Error in selling")
         })
   }
 
@@ -99,8 +106,11 @@ const PacksBuyPage = () => {
 
           />
         </div>
+        <div className="container">
+          <DebitCardPayment/>
+        </div>
 
-        <button type="submit" className="btn btn-primary" onClick={handleBuy}>
+        <button type="submit" className="btn btn-primary my-2" onClick={handleBuy}>
           Submit
         </button>
       </div>

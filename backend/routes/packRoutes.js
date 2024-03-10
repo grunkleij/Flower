@@ -47,7 +47,6 @@ const getUid = (username) => {
             res.status(500).json({ error: 'Internal Server Error' });
             return;
         }
-        console.log(result);
         res.json(result);
     });
 });
