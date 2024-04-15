@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import DebitCardPayment from "../Payment/DebitCardPayment ";
+import "./BuyPage.css"
 
 const BuyPage = () => {
   const [flowers, setFlowers] = useState([]);
@@ -38,7 +39,7 @@ const BuyPage = () => {
       })
       .then((res) => {
         console.log(res.data);
-        alert(res.data);
+        alert("");
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +73,7 @@ const BuyPage = () => {
   }, 0);
 
   return (
-    <div className="container">
+    <div className="container buyc">
       <h2 className="my-4">Checkout</h2>
       {Array.isArray(flowers) &&
         flowers.map((e) => (

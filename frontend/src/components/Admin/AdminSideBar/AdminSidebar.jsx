@@ -40,40 +40,9 @@ const AdminSidebar = () => {
                         <Link to="#" onClick={()=>{handleClick("adminselling")}} className="nav-link px-0 align-middle">
                             <i className="fs-4 bi-table"></i> <span className="ms-1 d-none d-sm-inline">Flower Selling request</span></Link>
                     </li>
-                    <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
-                            <i className="fs-4 bi-bootstrap"></i> <span className="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                        <ul className="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                            <li className="w-100">
-                                <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 2</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#submenu3" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
-                            <i className="fs-4 bi-grid"></i> <span className="ms-1 d-none d-sm-inline">Products</span> </a>
-                            <ul className="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li className="w-100">
-                                <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 2</a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 3</a>
-                            </li>
-                            <li>
-                                <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 4</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link px-0 align-middle">
-                            <i className="fs-4 bi-people"></i> <span className="ms-1 d-none d-sm-inline">Customers</span> </a>
-                    </li>
+                    
+                    
+                    
                 </ul>
                 <hr/>
                 <div className="dropdown pb-4">

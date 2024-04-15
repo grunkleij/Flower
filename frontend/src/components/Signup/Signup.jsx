@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import {Link, useNavigate} from 'react-router-dom'
+import "./Signup.css"
 
 const Signup = () => {
     const [email,setEmail]=useState('');
@@ -31,7 +32,7 @@ const Signup = () => {
 
   return (
     <>
-    <form onSubmit={handleSingup} className="container">
+    <form onSubmit={handleSingup} className="container signuph">
   <div className="mb-3">
     <label for="exampleInputEmail1" className="form-label">Email address</label>
     <input onChange={(e)=>{setEmail(e.target.value)}} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>

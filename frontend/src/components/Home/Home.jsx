@@ -5,6 +5,9 @@ import AddToCart from "../AddToCart/AddToCart";
 import './Home.css'
 import { useAuth } from "../../context/AuthContext";
 import Packs from "../Packs/Packs";
+import { IoFlowerSharp } from "react-icons/io5";
+import { LuPackageOpen } from "react-icons/lu";
+import { BsCartPlusFill } from "react-icons/bs";
 
 const Home = () => {
   const [flowers, setFlowers] = useState([]);
@@ -23,10 +26,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className=" container py-4">
+    <div className=" container homeflower py-4">
       <div className="d-flex justify-content-between align-items-center">
-        <button className={`btn ${pack ? 'btn-primary bbtn' : 'btn-secondary bbtn'}`} onClick={() => setPack(false)}>Flowers</button>
-        <button className={`btn ${pack ? 'btn-secondary bbtn' : 'btn-primary bbtn'}`} onClick={() => setPack(true)}>Packs</button>
+        <button className={`btn ${pack ? 'btn-primary bbtn' : 'btn-secondary bbtn'}`} onClick={() => setPack(false)}><IoFlowerSharp /></button>
+        <button className={`btn ${pack ? 'btn-secondary bbtn' : 'btn-primary bbtn'}`} onClick={() => setPack(true)}><LuPackageOpen /></button>
       </div>
 
       {pack ? (
@@ -47,7 +50,7 @@ const Home = () => {
                     <p className="card-text">Price: {e.fprice}</p>
                     <div className="dropdown">
                       <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Buy
+                      <BsCartPlusFill />
                       </button>
                       <ul className="dropdown-menu dropdown-style">
                         <li><a className="dropdown-item" href="#"><AddToCart flowerData={e} userName={user.user}/></a></li>

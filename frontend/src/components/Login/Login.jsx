@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import "./login.css"
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ const Login = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container loginh">
       <form onSubmit={handleLogin}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>

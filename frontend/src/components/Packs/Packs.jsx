@@ -18,12 +18,12 @@ const Packs = () => {
   }, []);
   return (
     <>
-      <div className="container">
+      <div className="container row row-cols-1 row-cols-md-3 g-4">
       
         {
             packs&&packs.map((e)=>(
 
-            <div class="card" style={{"width": "18rem"}}>
+            <div class="card m-2" style={{"width": "18rem"}}>
           <img class="card-img-top" src={`https://source.unsplash.com/featured/1600x900?${e.pack_name}`} alt="Card image cap" />
           <div class="card-body">
             <h5 class="card-title">{e.pack_name}</h5>

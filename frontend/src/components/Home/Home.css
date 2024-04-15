@@ -3,11 +3,19 @@
 }
 
 .flowerc{
-    border: 2px dotted black;
+    /* border: 2px dashed rgb(147, 180, 204); */
     border-radius: 20px;
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
 }
 
 .bbtn{
     border-radius:30px;
-    border:2px dotted black;
+    border:2px dashed rgb(147, 180, 204);
+    
+}
+
+.homeflower{
+    min-height: 100vh;
 }

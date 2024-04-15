@@ -42,7 +42,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navc navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <Link className="navbar-brand" to="/">
         <IoFlowerOutline />
@@ -129,7 +129,7 @@ const NavBar = () => {
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button className="btn btn-success" type="submit">
               Search
             </button>
           </form>
@@ -137,14 +137,14 @@ const NavBar = () => {
             <>
               <Link
                 to="signup"
-                className="btn btn-outline-success mx-1"
+                className="btn btn-success mx-1"
                 type="submit"
               >
                 Signup
               </Link>
               <Link
                 to="login"
-                className="btn btn-outline-success mx-1"
+                className="btn btn-success mx-1"
                 type="submit"
               >
                 Login

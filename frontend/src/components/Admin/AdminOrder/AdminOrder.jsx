@@ -11,6 +11,7 @@ const AdminOrder = () => {
     axios.post("http://localhost:4000/api/delivery",{uid:uid,eid:eid,order_id:order_id})  
       .then((res)=>{
         console.log(res);
+        alert("employee assigned")
       })
       .catch((err)=>{
         console.log(err);

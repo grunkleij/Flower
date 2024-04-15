@@ -56,4 +56,33 @@ router.post('/floweradd',(req,res)=>{
   });
 
 
+  router.delete('/flowerdelete/:fid', (req, res) => {
+    const fid = req.params.fid;
+
+    db.query("SELECT * FROM flowers WHERE fid=?", fid, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+        }
+
+        if (result.length === 0) {
+            res.status(404).json({ error: 'Flower not found' });
+            return;
+        }
+
+        db.query("DELETE FROM flowers WHERE fid=?", fid, (err, deleteResult) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({ error: 'Internal Server Error' });
+                return;
+            }
+
+            // Send success response
+            res.json({ message: 'Flower deleted successfully' });
+        });
+    });
+});
+  
+
 module.exports = router;

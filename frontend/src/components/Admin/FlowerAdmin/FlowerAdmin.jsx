@@ -43,6 +43,20 @@ const FlowerAdmin = () => {
         })
   }
 
+  const handleDelete = (e, fid) => {
+    e.preventDefault();
+    axios.delete(`http://localhost:4000/api/flowerdelete/${fid}`)
+        .then((res) => {
+            alert("Deleted");
+            fetchData();
+            // Handle any further actions upon successful deletion
+        })
+        .catch((err) => {
+            console.log(err);
+            // Handle error
+        });
+}
+
   const fetchData = () => {
     axios
       .get("http://localhost:4000/api/flowers")
@@ -91,6 +105,7 @@ const FlowerAdmin = () => {
                       }}
                     />
                     <button className="btn mx-2 btn-primary">update</button>
+                    <button onClick={(d)=>{handleDelete(d,e.fid)}} className="btn mx-2 btn-danger">Delete</button>
                   </form>
                 </td>
               </tr>

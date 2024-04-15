@@ -19,7 +19,7 @@ const DeliveryPage = () => {
     }, [])
 
     return (
-        <div className="container">
+        <div className="container " style={{"minHeight":"100vh"}}>
             {
                 detail && detail.map((e) => (
                     <div key={e.delivery_detail&&e.delivery_detail.dtimestamp} className="container my-3">
